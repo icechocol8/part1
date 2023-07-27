@@ -1,1 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote & Cat Image</title>
+   
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            color: #444;
+            text-align: center;
+            margin: 50px auto;
+            max-width: 500px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        button {
+            background-color: #00a8cc;
+            color: #fff;
+            font-size: 16px;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #007c99;
+        }
+
+        #joke {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .placeholder {
+            font-size: 16px;
+            font-style: italic;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <h1>Random Joke Generator</h1>
+   
+    
+    <button onclick="fetchJoke()">Get Joke</button>
+    <div id="joke" class="placeholder">Click the button to get a random joke!</div>
+
+    <h2>Random Cat Image</h1>
+    <button id="catButton">Get Random Cat Image</button>
+    <img id="catImage" src="" alt="Random Cat Image">
+
+    <script>
+        function fetchJoke() {
+            fetch('get_jokes.php')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('joke').innerText = data.joke;
+                })
+                .catch(error => {
+                    console.error('Error fetching joke:', error);
+                });
+        }
+
+        document.getElementById("catButton").addEventListener("click", function() {
+            fetch("get_cat_image.php")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("catImage").src = data.url;
+            })
+            .catch(error => console.log(error));
+        });
+    </script>
+</body>
+</html>
 
